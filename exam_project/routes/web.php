@@ -41,12 +41,16 @@ Route::post('/register',
 
 Route::get('/backoffice/dashboard', function () {
     $user = Auth::user();
+    $clientesCount = Cliente::count();
+    $productosCount = Producto::count();
+    $usuariosCount = User::count();
     if($user == null){
         return redirect()->route('formLogin')->withErrors([
             'email' => 'Usuario no autenticado'
         ]);
     }
-    return view('backoffice.dashboard', ['user' => $user]);
+    return view('backoffice.dashboard', ['user' => $user, 'clientesCount' => $clientesCount,
+        'productosCount' => $productosCount, 'usuariosCount' => $usuariosCount]);
 })->name('backoffice.dashboard');
 
 Route::get('/backoffice/dashboard/users', function () {
@@ -58,8 +62,8 @@ Route::get('/backoffice/dashboard/users', function () {
     }
     $Users = User::All();
 
-    return view('backoffice.dashboard.users', ['user' => $user, 'totalUsers' => $Users]);
-})->name('backoffice.dashboard.users');
+    return view('backoffice.dashboard-user', ['user' => $user, 'totalUsers' => $Users]);
+})->name('backoffice.dashboard.user');
 
 Route::get('/backoffice/dashboard/products', function () {
     $user = Auth::user();
@@ -70,8 +74,8 @@ Route::get('/backoffice/dashboard/products', function () {
     }
     $products = Producto::All();
 
-    return view('backoffice.dashboard.products', ['user' => $user, 'totalproducts' => $products]);
-})->name('backoffice.dashboard.products');
+    return view('backoffice.dashboard-product', ['user' => $user, 'totalproducts' => $products]);
+})->name('backoffice.dashboard.product');
 
 Route::get('/backoffice/dashboard/clients', function () {
     $user = Auth::user();
@@ -82,5 +86,5 @@ Route::get('/backoffice/dashboard/clients', function () {
     }
     $clients = Cliente::All();
 
-    return view('backoffice.dashboard.clients', ['user' => $user, 'totalclients' => $clients]);
-})->name('backoffice.dashboard.clients');
+    return view('backoffice.dashboard-client', ['user' => $user, 'totalclients' => $clients]);
+})->name('backoffice.dashboard.client');

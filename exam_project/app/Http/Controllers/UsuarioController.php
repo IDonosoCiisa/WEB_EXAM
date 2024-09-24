@@ -14,7 +14,9 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        $usuario = User::create($request->all());
+        $data = $request->all();
+        $data['email'] = $data['email'] . '@ventafix.com';
+        $usuario = User::create($data);
         return response()->json($usuario, 201);
     }
 

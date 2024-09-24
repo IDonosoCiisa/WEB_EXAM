@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Middleware\ApiKeyMiddleware;
 use Illuminate\Support\Facades\Route;
