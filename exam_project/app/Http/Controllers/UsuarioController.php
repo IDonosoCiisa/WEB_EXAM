@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
     public function index()
     {
-        return Usuario::all();
+        return User::all();
     }
 
     public function store(Request $request)
     {
-        $usuario = Usuario::create($request->all());
+        $usuario = User::create($request->all());
         return response()->json($usuario, 201);
     }
 
     public function show($id)
     {
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         if ($usuario) {
             return $usuario;
         }
@@ -29,7 +29,7 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id)
     {
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         if ($usuario) {
             $usuario->update($request->all());
             return $usuario;
@@ -39,7 +39,7 @@ class UsuarioController extends Controller
 
     public function destroy($id)
     {
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         if ($usuario) {
             $usuario->delete();
             return response()->json(null, 204);
