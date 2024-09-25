@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -16,6 +17,7 @@ class UsuarioController extends Controller
     {
         $data = $request->all();
         $data['email'] = $data['email'] . '@ventafix.com';
+        $data['password'] = Hash::make($data['password']);
         $usuario = User::create($data);
         return response()->json($usuario, 201);
     }
